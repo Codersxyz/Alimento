@@ -16,20 +16,18 @@ const RestaurantuserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    confirmPassword: {
-      type: String,
-      required: true,
-      validate: {
-        validator: function(value) {
-          return value === this.password;
-        },
-        message: 'Passwords do not match',
-      },
-    },
     avatar:{
       type: String,
       default: "client\public\blank profile.png"
     },
+    otp:{
+      type: Number,
+      default: 0
+    },
+    address:{
+      type: String, // You can adjust the type based on your requirements (e.g., coordinates, full address, etc.)
+      required: true,
+    }
   },
   { timestamps: true }
 );

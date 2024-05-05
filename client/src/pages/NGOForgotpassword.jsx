@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link
 import './Forgotpassword.css';
 
-const NGOForgotpassword = () => {
-  const [email, setEmail] = useState('');
+const NGOForgotpassword = ({email,setEmail}) => {
+//   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     try {
       const response = await fetch('api/NGOAuth/NGOForgotpassword', {
         method: 'POST',

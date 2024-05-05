@@ -7,13 +7,14 @@ import {
   signInSuccess,
   signInFailure,
 } from '../redux/user/userSlice';
+// import ROAuth from '../Components/ROAuth';
 
 export default function RestaurantsignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+      
   
   useEffect(() => {
     // Clear error when component mounts
@@ -61,22 +62,20 @@ export default function RestaurantsignIn() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
       if (data.success === false) {
         dispatch(signInFailure(data.message));
         return;
       }
       dispatch(signInFailure(null));
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate('/FoodDonatePage');
     }catch (error){
       dispatch(signInFailure(error.message));
     }
   };
-
   return (
     <div className='signin'>
-      <h1 id='role'>Sign in <br />  as <span id="google">Donor</span></h1>
+      <h1 id='role'>Sign in <br />  as <span className="google">Donor</span></h1>
       <form onSubmit = {handleSubmit} action="" className='signin_form'>
         <h2 id='title'>Sign In</h2>
         <input type="email" className="inputs" id="email"  placeholder='Email' required onChange = {handleChange} />
@@ -91,12 +90,13 @@ export default function RestaurantsignIn() {
         
         <button disabled={loading} className="register">{loading ? 'Loading...' : 'Sign in as Donor'}</button>
         <div className="others">
-            <span>Or, continue with <a id='google' href="/">Google</a><br/> </span>
+            {/* <span>Or, continue with <a id='google' href="/">Google</a><br/> </span> */}
+            <span>Forgot password? <a id='forgot-password' className='google' href="/RestaurantForgotpassword">Reset it here</a><br/></span><br/>
             <span>Don't have a account, <a id='google' href="/Restaurantsignup">Create one</a> </span>
             {error && <p className='text-red-500 mt-1'>{error}</p>} 
         </div>
+        {/* <ROAuth/> */}
       </form>
     </div>
   )
 }
-

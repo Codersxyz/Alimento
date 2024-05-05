@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
-import './NGOotp.css';
+import { Navigate } from 'react-router-dom';
 
 const NGOotp = ({ email }) => {
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
-  const [otpVerified, setOtpVerified] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await fetch('api/NGOAuth/NGOverifyOTP', { 
+      const response = await fetch('/api/NGOAuth/NGOverifyOTP', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ const NGOotp = ({ email }) => {
       });
       const data = await response.json();
       if (response.ok) {
-        setOtpVerified(true);
+        setSuccessMessage(data.message); // Update success message state
       } else {
         setError(data.error);
       }
@@ -32,25 +32,23 @@ const NGOotp = ({ email }) => {
     setOtp(e.target.value);
   };
 
+  // Redirect to NewPasswordForm component when successMessage is set
+  if (successMessage) {
+    return <Navigate to="/NGONewPasswordForm" state={{ email }} />;
+  }
+
   return (
     <div>
-      {!otpVerified ? (
-        <>
-          <h2>Enter OTP</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="otp">OTP:</label>
-              <input type="text" id="otp" value={otp} onChange={handleChange} required />
-            </div>
-            <button type="submit">Verify OTP</button>
-            {error && <p className="error-message">{error}</p>}
-          </form>
-        </>
-      ) : (
-        <Link to="/NGOResetpassword">
-          <button>Reset Password</button>
-        </Link>
-      )}
+      <h2>Enter OTP</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="otp">OTP:</label>
+          <input type="text" id="otp" value={otp} onChange={handleChange} required />
+        </div>
+        <button type="submit">Verify OTP</button>
+        {error && <p className="error-message">{error}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+      </form>
     </div>
   );
 };
