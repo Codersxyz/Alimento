@@ -11,8 +11,6 @@ node_modules/
 dist
 dist-ssr
 *.local
-client/node_modules/
-
 
 # Editor directories and files
 .vscode/*
@@ -25,4 +23,3 @@ client/node_modules/
 *.sln
 *.sw?
 .env
-client/.env
