@@ -17,20 +17,19 @@ import {
   signOutUserStart,
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
-// import { Link } from 'react-router-dom';
-
-
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 export default function RestaurantProfile() {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
-  // const { currentNGOUser } = useSelector((state) => state.NGOUser);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
+
 
   useEffect(() => {
     if (file) {
@@ -117,11 +116,13 @@ export default function RestaurantProfile() {
         return;
       }
       dispatch(deleteUserSuccess(data));
+  
+      // Navigate to the homepage
+      navigate('/'); // Replace '/' with the path to your homepage
     } catch (error) {
       dispatch(deleteUserFailure(data.message));
     }
   };
-
   
     return (
         <div className='p-3 max-w-lg mx-auto'>

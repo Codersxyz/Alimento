@@ -45,12 +45,9 @@ export default function App() {
     <Route path='/FoodDonatePage' element={<FoodDonatePage />} />
     <Route path='/ShowDonation' element={<  ShowDonation />} />
     <Route path='/DonationDetails/:id' element={<  DonationDetails />} />
-    <Route element={<PrivateRestaurantRoute />}>
-        <Route path='/RestaurantProfile' element={< RestaurantProfile />} />
-          </Route>
-          <Route element={<PrivateNGORoute />}>
-        <Route path='/NGOProfile' element={<  NGOProfile />} />
-          </Route>
+    <Route path='/RestaurantProfile' element={< RestaurantProfile />} />
+    <Route path='/NGOProfile' element={<  NGOProfile />} />
+
   </Routes>
 </BrowserRouter>
   );

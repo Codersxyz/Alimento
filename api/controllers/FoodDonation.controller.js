@@ -1,7 +1,7 @@
 import FoodDonate from "../models/FoodDonate.model.js";
 import nodemailer from 'nodemailer';
-import NGOUser from '../models/NGOUser.model.js';
-import RestaurantUser from '../models/RestaurantUser.model.js';
+// import NGOUser from '../models/NGOUser.model.js';
+// import RestaurantUser from '../models/RestaurantUser.model.js';
 
 export const CreateFoodDonation = async (req, res, next) => {
   try {

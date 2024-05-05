@@ -1,7 +1,7 @@
 import express from 'express';
 import { RestaurantverifyToken } from '../utils/verifyRestaurantUser.js';
 import { CreateFoodDonation, getAllDonations, getDonation, receiveDonation } from '../controllers/FoodDonation.controller.js';
-import { NGOverifyToken } from '../utils/verifyNGOUser.js';
+// import { NGOverifyToken } from '../utils/verifyNGOUser.js';
 
 const router = express.Router();
 

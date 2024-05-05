@@ -1,6 +1,17 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function Header() {
+  const [userType, setUserType] = useState(null); // New state variable
+
+  const handleRestaurantClick = () => {
+    setUserType('Restaurant');
+  };
+
+  const handleNGOClick = () => {
+    setUserType('NGO');
+  };
+
   return (
     <header className='bg-slate-200 shadow-md navig'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
@@ -21,29 +32,22 @@ export default function Header() {
               About
             </li>
           </Link>
-          <Link to='/restaurantsignIn'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Restaurant
-            </li>
-          </Link>
-          <Link to='/NGOsignIn'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              NGO
-            </li>
-          </Link>
-          {/* <Link to='/profile'>
-            {currentUser ? (
-              <img
-                className='rounded-full h-7 w-7 object-cover'
-                src={currentUser.avatar}
-                alt='profile'
-              />
-            ) : (
-              <li className=' text-slate-700 hover:underline'> </li>
-            )}
-          </Link> */}
+          {userType !== 'NGO' && (
+            <Link to='/restaurantsignIn' onClick={handleRestaurantClick}>
+              <li className='hidden sm:inline text-slate-700 hover:underline'>
+                Restaurant
+              </li>
+            </Link>
+          )}
+          {userType !== 'Restaurant' && (
+            <Link to='/NGOsignIn' onClick={handleNGOClick}>
+              <li className='hidden sm:inline text-slate-700 hover:underline'>
+                NGO
+              </li>
+            </Link>
+          )}
         </ul>
       </div>
     </header>
-  )
+  );
 }

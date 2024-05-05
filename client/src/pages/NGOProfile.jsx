@@ -17,20 +17,20 @@ import {
   signOutUserStart,
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 
 
 export default function NGOProfile() {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
-  // const { currentNGOUser } = useSelector((state) => state.NGOUser);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if (file) {
@@ -107,6 +107,7 @@ export default function NGOProfile() {
     }
   };
 
+  
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
@@ -118,8 +119,8 @@ export default function NGOProfile() {
       }
       dispatch(deleteUserSuccess(data));
   
-      // Redirect to the sign-in page.
-      // window.location.href = '/Restaurantsignin'; // Replace '/signin' with the path to your sign-in page.
+      // Navigate to the homepage
+      navigate('/'); // Replace '/' with the path to your homepage
     } catch (error) {
       dispatch(deleteUserFailure(data.message));
     }

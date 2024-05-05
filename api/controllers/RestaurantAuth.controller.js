@@ -83,7 +83,7 @@ export const Restaurantsignin = async (req, res, next) => {
     if (!validRestaurantUser) return next(errorHandler(404, 'User not found!'));
     const validRestaurantPassword = bcryptjs.compareSync(password, validRestaurantUser.password);
     if (!validRestaurantPassword) return next(errorHandler(401, 'Wrong credentials!'));
-    const token = jwt.sign({ id: validRestaurantUser._id }, process.env.JWT_SECRET2);
+    const token = jwt.sign({ id: validRestaurantUser._id }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validRestaurantUser._doc;
 
     res

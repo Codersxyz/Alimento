@@ -39,7 +39,6 @@ export default function FoodDonatePage () {
         alert('Donation successful');
       } else {
         const data = await response.json();
-        console.log(data);
       }
     };
 
@@ -83,6 +82,16 @@ export default function FoodDonatePage () {
               </ul>
             </div>
           </div> */}
+          <div className="profile">
+          <Link to="/RestaurantProfile">
+            {currentUser.avatar ? (
+              <img src={currentUser.avatar} alt="Profile" className='rounded-full h-12 w-12 object-cover cursor-pointer self-center mt-2'/>
+            ) : (
+              'Profile'
+            )}
+          </Link>
+        </div>
+
           <div className="main">
             <h1 id='main_title'>Donate Food</h1>
             <div>
@@ -93,15 +102,15 @@ export default function FoodDonatePage () {
               <h1 className='title'>Select type of Food :</h1>
               <div className="wrapper">
                 <div className="card">
-                  <div className="category"></div>
+                  <div className="category" style={{backgroundImage: "url('./cooked.jpg')"}}></div>
                   <input type="radio" name='catergory_checkbox' className="category_check" value="Cooked" onChange={e => setFoodType(e.target.value)} /> Cooked
                 </div>
                 <div className="card">
-                  <div className="category"></div>
+                  <div className="category" style={{backgroundImage: "url('./raw.jpg')"}}></div>
                   <input type="radio" name='catergory_checkbox' className="category_check" value="Raw" onChange={e => setFoodType(e.target.value)} /> Raw
                 </div>
                 <div className="card">
-                  <div className="category"></div>
+                  <div className="category" style={{backgroundImage: "url('./packed.jpg')"}}></div>
                   <input type="radio" name='catergory_checkbox' className="category_check" value="Packed" onChange={e => setFoodType(e.target.value)} /> Packed
                 </div> 
               </div>
@@ -111,11 +120,11 @@ export default function FoodDonatePage () {
                 <h1 className='title'>Meal Type</h1>
                 <div className="wrapper">
                   <div className="card">
-                    <div className="category"></div>
+                    <div className="category" style={{backgroundImage: "url('./veg.jpg')"}}> </div>
                     <input type="radio" name='meal' id='veg' className="meal_type" value="Veg" onChange={e => setMealType(e.target.value)} /> Veg
                   </div>
                   <div className="card">
-                    <div className="category"></div>
+                    <div className="category" style={{backgroundImage: "url('./nonveg.jpg')"}}></div>
                     <input type="radio" name='meal' id='nonveg' className="meal_type" value="Non-Veg" onChange={e => setMealType(e.target.value)} /> Non-Veg
                   </div>
                 </div>

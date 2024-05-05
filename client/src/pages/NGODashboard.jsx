@@ -9,10 +9,23 @@ export default function NGODashboard() {
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
+    // Load received donations from local storage when component mounts
+    const loadedReceivedDonations = localStorage.getItem('receivedDonations');
+    if (loadedReceivedDonations) {
+      setReceivedDonations(JSON.parse(loadedReceivedDonations));
+    }
+  }, []);
+
+  useEffect(() => {
     fetch('/api/FoodDonation/getAll')
       .then(response => response.json())
       .then(data => setDonations(data));
   }, []);
+
+  useEffect(() => {
+    // Save received donations to local storage whenever it changes
+    localStorage.setItem('receivedDonations', JSON.stringify(receivedDonations));
+  }, [receivedDonations]);
 
   const handleReceiveDonation = (id) => {
     fetch(`/api/FoodDonation/donations/${id}/receive`, {
@@ -22,25 +35,25 @@ export default function NGODashboard() {
     .then(data => {
       // Add the received donation to the receivedDonations array
       setReceivedDonations([...receivedDonations, id]);
+
+      // Remove the donation from receivedDonations after 5 minutes
+      setTimeout(() => {
+        setReceivedDonations(receivedDonations.filter(donationId => donationId !== id));
+      }, 300000); // 300000 milliseconds = 5 minutes
     });
   };
 
   return (
     <div className='container'>
-      <div className="sidepanel">
-      <div className="profile">
-            <Link to="/NGOProfile">
-              {currentUser.avatar ? (
-                <img src={currentUser.avatar} alt="Profile" />
-              ) : (
-                'Profile'
-              )}
-            </Link>
-            </div>
-        <div className="profiledetails">
-          Received Donations:
+        <div className="profile">
+          <Link to="/NGOProfile">
+            {currentUser.avatar ? (
+              <img src={currentUser.avatar} alt="Profile" className='rounded-full h-12 w-12 object-cover cursor-pointer self-center mt-2'/>
+            ) : (
+              'Profile'
+            )}
+          </Link>
         </div>
-      </div>
 
       <div className="main">
         {donations.map(donation => (

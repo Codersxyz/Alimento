@@ -84,7 +84,7 @@ export const NGOsignin = async (req, res, next) => {
     if (!validNGOUser) return next(errorHandler(404, 'User not found!'));
     const validNGOPassword = bcryptjs.compareSync(password, validNGOUser.password);
     if (!validNGOPassword) return next(errorHandler(401, 'Wrong credentials!'));
-    const token = jwt.sign({ id: validNGOUser._id }, process.env.JWT_SECRET1);
+    const token = jwt.sign({ id: validNGOUser._id }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validNGOUser._doc;
 
     res
