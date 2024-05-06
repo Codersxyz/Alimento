@@ -118,13 +118,13 @@ export default function NGOProfile() {
         return;
       }
       dispatch(deleteUserSuccess(data));
-  
-      // Navigate to the homepage
-      navigate('/'); // Replace '/' with the path to your homepage
+      sessionStorage.removeItem('user'); // Remove user from sessionStorage
+      navigate('/'); // Navigate to the homepage
     } catch (error) {
       dispatch(deleteUserFailure(data.message));
     }
   };
+  
   
 
   

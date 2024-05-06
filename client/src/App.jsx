@@ -19,36 +19,35 @@ import NGOProfile from './pages/NGOProfile';
 import RestaurantProfile from './pages/RestaurantProfile';
 import ShowDonation from './pages/ShowDonation';
 import DonationDetails from './pages/DonationDetails';
-import PrivateNGORoute from './Components/PrivateNGORoute';
-import PrivateRestaurantRoute from './Components/PrivateRestaurantRoute';
-
+import { UserProvider } from './Components/UserContext';
 
 export default function App() {
   const [email, setemail] = useState('');
-  return(
-  <BrowserRouter>
-  <Header/>
-  <Routes>
-    <Route path='/' element={<Home />} />
-    <Route path='/about' element={<About />} />
-    <Route path='/restaurantsignin' element={<Restaurantsignin />} />
-    <Route path='/NGOsignin' element={<NGOsignin />} />
-    <Route path='/NGOsignup' element={<NGOsignup />} />
-    <Route path='/Restaurantsignup' element={<Restaurantsignup />} />
-    <Route path='/NGOForgotpassword' element={<NGOForgotPassword email={email} setEmail={setemail}/>} />
-    <Route path='/NGOotp' element={<NGOotp email={email} />} />
-    <Route path='/NGONewPasswordForm' element={<NGONewPasswordForm />} />
-    <Route path='/RestaurantForgotpassword' element={<RestaurantForgotpassword email={email} setEmail={setemail}/>} />
-    <Route path='/Restaurantotp' element={<Restaurantotp email={email} />} />
-    <Route path='/RestaurantNewPasswordForm' element={<RestaurantNewPasswordForm />} />
-    <Route path='/NGODashboard' element={<NGODashboard />} />
-    <Route path='/FoodDonatePage' element={<FoodDonatePage />} />
-    <Route path='/ShowDonation' element={<  ShowDonation />} />
-    <Route path='/DonationDetails/:id' element={<  DonationDetails />} />
-    <Route path='/RestaurantProfile' element={< RestaurantProfile />} />
-    <Route path='/NGOProfile' element={<  NGOProfile />} />
-
-  </Routes>
-</BrowserRouter>
+  return (
+    <UserProvider>
+      <BrowserRouter>
+        <Header/>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/restaurantsignin' element={<Restaurantsignin />} />
+          <Route path='/NGOsignin' element={<NGOsignin />} />
+          <Route path='/NGOsignup' element={<NGOsignup />} />
+          <Route path='/Restaurantsignup' element={<Restaurantsignup />} />
+          <Route path='/NGOForgotpassword' element={<NGOForgotPassword email={email} setEmail={setemail}/>} />
+          <Route path='/NGOotp' element={<NGOotp email={email} />} />
+          <Route path='/NGONewPasswordForm' element={<NGONewPasswordForm />} />
+          <Route path='/RestaurantForgotpassword' element={<RestaurantForgotpassword email={email} setEmail={setemail}/>} />
+          <Route path='/Restaurantotp' element={<Restaurantotp email={email} />} />
+          <Route path='/RestaurantNewPasswordForm' element={<RestaurantNewPasswordForm />} />
+          <Route path='/NGODashboard' element={<NGODashboard />} />
+          <Route path='/FoodDonatePage' element={<FoodDonatePage />} />
+          <Route path='/ShowDonation' element={<ShowDonation />} />
+          <Route path='/DonationDetails/:id' element={<DonationDetails />} />
+          <Route path='/RestaurantProfile' element={<RestaurantProfile />} />
+          <Route path='/NGOProfile' element={<NGOProfile />} />
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
